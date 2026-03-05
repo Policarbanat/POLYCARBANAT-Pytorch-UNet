@@ -130,7 +130,7 @@ def train_model(
                 pbar.set_postfix(**{'loss (batch)': loss.item()})
 
                 # Evaluation round
-                division_step = (n_train // (5 * batch_size))
+                division_step = (n_train // (3 * batch_size))
                 if division_step > 0:
                     if global_step % division_step == 0:
                         histograms = {}
@@ -162,7 +162,7 @@ def train_model(
                             pass
 
         epoch_end_time = time.time()
-        logging.info(f'Epoch {epoch} finished. Time per epoch: {epoch_end_time - epoch_start_time:.2f} seconds')
+        logging.info(f'Epoch {epoch} finished. Time per epoch: {(epoch_end_time - epoch_start_time) / 60:.2f} mins')
 
         if save_checkpoint:
             Path(dir_checkpoint).mkdir(parents=True, exist_ok=True)
